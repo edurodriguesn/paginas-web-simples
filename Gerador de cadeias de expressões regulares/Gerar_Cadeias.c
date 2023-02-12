@@ -5,9 +5,15 @@
 
 int exc_simbolo(int i, char *c)
 {
-    int valor = c[i - 1];
-    c[i] = ' ';
-    c[i - 1] = ' ';
+    int valor = c[i - 1]; // Guarda o valor antes do simbolo
+    int j = i - 1;        // Posição antes do simbolo
+    c[j] = c[i];
+    while (j < 50)
+    {
+        c[j] = c[j + 1];
+        j++;
+    }
+
     return valor;
 }
 
@@ -37,10 +43,13 @@ void ler_exp(char exp_reg[])
         case '*':
             valor = exc_simbolo(i, cadeia);
             qntd = rand() % 5;
-            for (j = i; aux < qntd; j++)
+            printf("%d", qntd);
+            j = i - 1;
+            while (aux < 1)
             {
                 cadeia[j] = valor;
                 aux++;
+                j++;
             }
             i = j;
             aux = 0;
@@ -66,7 +75,6 @@ void ler_exp(char exp_reg[])
 
 void main(void)
 {
-
     char exp_reg[80];
     gets(exp_reg);
     ler_exp(exp_reg);

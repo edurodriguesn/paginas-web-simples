@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <time.h>
-void test(char *c)
-{
-    c[0] = ' ';
-}
+#include <string.h>
+
 int main(void)
 {
-    char cadeia[] = {'0', '3', '1'};
-    test(cadeia);
-    printf("%c", cadeia[0]);
+    char cadeia[] = {"oi"};
+    cadeia[1] = ' ';
+    printf("%c%c", cadeia[1], cadeia[0]);
 }
