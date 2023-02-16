@@ -42,11 +42,13 @@ int cadeia_asterisco(int controle, int i, char *cadeia)
     }
 }
 
-int cadeia_mais(int controle, int i, char *cadeia)
+int cadeia_mais(int controle, int i, char *cadeia, char simbolo)
 {
     int valor = cadeia[i - 1];
     int aux = i;
     int j = 0;
+
+    if(simbolo == )
 
     switch (controle)
     {
@@ -109,22 +111,20 @@ void ler_exp(char exp_reg[])
     //{
     for (i = 0; i < tam; i++)
     {
-        switch (exp_reg[i])
-        {
+         switch (exp_reg[i])
+         {
         case '*':
-            i = cadeia_asterisco(controle, i, cadeia);
-            break;
+             cadeia_asterisco(controle, i, cadeia);
+             break;
 
         case '^':
-            if (controle != 0)
-            {
-                cadeia_mais(controle, i, cadeia);
-            }
-            break;
+            char simbolo = '^'
+                cadeia_mais(controle, i, cadeia, simbolo);
+            
+     break;
 
-            // case '(':
-            //     /* code */
-            //     break;
+            // case '(':    /* code */
+                break;
 
         default:
             cadeia[i] = exp_reg[i];
