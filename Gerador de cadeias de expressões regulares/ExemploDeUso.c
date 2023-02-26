@@ -90,10 +90,10 @@ int main()
     scanf("%s",CPF);
     VerificaPadrao(CPF); //Chama a função que irá verificar se o CPF está no padrão correto, utilizando a string CPF como parametro
     printf("Status do do padrão do CPF: %s\n",StatusPadraoCPF); //Retorna com a mensagem informando o status do padrão do CPF
-    if(strcmp(StatusPadraoCPF,"Dentro do padrao")==0)
+    if(strcmp(StatusPadraoCPF,"Dentro do padrao")==0)//Verifica se o CPF está dentro do padrão
     {
-        ValidaCPF(CPF);
-        printf("Status de Validade do CPF: %s\n",StatusValidadeCPF);
+        ValidaCPF(CPF);//Se tiver, chama a função se o CPF é válido
+        printf("Status de Validade do CPF: %s\n",StatusValidadeCPF);//Exibe o status da validade
     }
     return 0;
 }
