@@ -47,7 +47,6 @@ void VerificaPadrao(char CPF[14])
 void ValidaCPF(char CPF[14])
 {
     int Multiplicador=10,Somatorio=0;//Variaveis utilizadas para a operação de validação do CPF
-    int DigitoVerificador;//Variavel que receberá como inteiro os dois digitos verificadores do CPF
     int CPFValido;
     char CaractereCPF[1];//Essa string receberá o caractere do indice do CPF para ser transformada em int
     for(int IndiceCPF=0;IndiceCPF<11;IndiceCPF++)//Percorre os 11 primeiros digitos do CPF
@@ -60,8 +59,7 @@ void ValidaCPF(char CPF[14])
         }
     }
     CaractereCPF[0]=CPF[12];//A string recebe o primeiro digito verificador
-    DigitoVerificador=atoi(CaractereCPF);//A variavel recebe o caractere do digito verificador em fomrato inteiro
-    if((Somatorio*10)%11==DigitoVerificador)//Verifica se ao multiplicar o somatorio por 10, e dividir por 11, sobra um valor igual ao primeiro digito verificador
+    if((Somatorio*10)%11==atoi(CaractereCPF))//Verifica se ao multiplicar o somatorio por 10, e dividir por 11, sobra um valor igual ao primeiro digito verificador
         CPFValido=1; //Caso seja verdadeiro, a variavel CPFValido é dada como true
         else
             CPFValido=0; //Caso não seja igual, então retorna falso, logo o CPF não é válido
@@ -78,8 +76,7 @@ void ValidaCPF(char CPF[14])
         }
     }
     CaractereCPF[0]=CPF[13];
-    DigitoVerificador=atoi(CaractereCPF);
-    if((Somatorio*10)%11!=DigitoVerificador) //Agora faz a mesma operação mas compara a sobra com o segundo digito verificador
+    if((Somatorio*10)%11!=atoi(CaractereCPF)) //Agora faz a mesma operação mas compara a sobra com o segundo digito verificador
         CPFValido=0; //Verifica apenas se é diferente do segundo digito, pois caso seja igual, o status da validação não muda, continua verdadeiro
     //Foi realizada a validação do segundo digito verificador (000.000.000-0X)
     if(CPFValido==1)
