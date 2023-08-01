@@ -5,24 +5,101 @@
         <title> Teste </title>
     </head>
     <body>
-        <ul> <!-- Lista não ordenada-->
-            <li> <!-- Usada para cada item-->
-                Our coffe
-                <ol> <!-- Lista ordenada-->
-                    <li> Caffe Latte </li>
-                    <li> Americano </li>
-                    <li> Capuccino</li>
-                </ol>
-            </li>
-            <li>
-                Our teas
-                <ol>
-                    <li> Earl Grey </li>
-                    <li> English Breakfast </li>
-                    <li> Herb Tea </li>
-                </ol>
-            </li>
-        </ul>
-        <h3> Reservas aqui! </h3>        
-    </body>
+        <div id="container">
+            <nav id="topnav">
+              <a href="index.html">HOME</a> | <a href="about.html">ABOUT US</a> | <a href="contact.html">CONTACT US</a>
+            </nav>  
+            <section id="content">
+              <h1>The IronHack Breakfast Place</h1>
+              <p>Here you will find all sorts of delicious treats</p>
+              <figure>
+                <img src="Imagens/Breakfast.jpg" width="400" alt="healthy breakfast" />
+                <figcaption>powered by brekkie.</figcaption>
+              </figure>
+            </section>
+            <footer>
+              <p class="love">Made with love by Ironhack</p>
+            </footer>
+        </div>
+
+        <div>
+            <h1>Níveis de título</h1>
+            <h2>Heading level 2</h2>
+            <h3>Heading level 3</h3>
+            <h4>Heading level 4</h4>
+            <h5>Heading level 5</h5>
+            <h6>Heading level 6</h6>
+        </div>
+        <div>
+            <h1>Listas</h1>
+            <ol>
+                <li>first item</li>
+                <li>second item</li>
+                <li>third item</li>
+            </ol>
+        </div>
+        <div>
+            <h1>Tabelas</h1>
+            <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Bootcamp</th>
+                  <th>City</th>
+                </tr>
+                <tr>
+                  <td>Jose Perez</td>
+                  <td>FullStack WebDev</td>
+                  <td>Madrid</td>
+                </tr>
+                <tr>
+                  <td>Michael Smith</td>
+                  <td>FrontEnd WebDev</td>
+                  <td>Barcelona</td>
+                </tr>
+                <tr>
+                  <td>Ariel Quinones</td>
+                  <td>MasterChef WebDev</td>
+                  <td>Miami</td>
+                </tr>
+              </table>              
+        </div>
+
+        <div>
+            <h1>Formulários</h1>
+            <h2>Método</h2>
+            <form action="/submit-form" method="post">
+                <label for="name">Name:</label>
+                <input id="name" type="text" name="name" />
+                <button type="submit">Save</button>
+            </form>   
+            <h2>Conjunto de campos</h2>
+            <form action="/users" method="post">
+                <fieldset>
+                  <input type="radio" id="radio" />
+                  <label for="radio">Click me</label>
+                </fieldset>
+            </form>
+            <h2>Listas</h2>        
+            <h3>Our food</h3>
+            <ul>
+                <li>
+                    Our coffee
+                    <ol>
+                    <li>Cafe Latte</li>
+                    <li>Americano</li>
+                    <li>Cappuccino</li>
+                    </ol>
+                </li>
+                <li>
+                    Our teas
+                    <ol>
+                    <li>Earl Grey</li>
+                    <li>English Breakfast</li>
+                    <li>Herb Tea</li>
+                    </ol>
+                </li>
+            </ul>
+
+        </div>
+        
 </html>
