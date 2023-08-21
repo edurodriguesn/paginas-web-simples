@@ -54,6 +54,7 @@ nav {
 }
 @media all and (min-width: 1000px){
     nav {
+        display: none;
         background-color: chocolate;
     }
 }
