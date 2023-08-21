@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 *
 {
     margin: 0px;
     padding: 0px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
     margin: 5px;
     border: 1px solid black;
-    height: 800px;
     display: flex;
     align-items: center;
     justify-content: center;
+    /*background-image: url(Imagens/backimage.jpg);
+    background-repeat: repeat;*/
 }
-
+.container > 
 .box {
     width: 100px;
     height: 200px;
