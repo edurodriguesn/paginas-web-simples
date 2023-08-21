@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+*
+{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    margin: 5px;
+    border: 1px solid black;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /*background-image: url(Imagens/backimage.jpg);
+    background-repeat: repeat;*/
+}
+.container > div {
+    width: 100px;
+    height: 200px;
+    border: 1px solid red;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav {
+    height: 70px;
+    background-color: gray;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* CSS PARA TELAS MÉDIAS */
+@media all and (min-width: 700px) and (max-width: 1000px){
+    nav {
+        height: 140px;
+        font-size: xx-large;
+        font-weight: 500;
+        background-color: black;
+    }
+    .container > div {
+        width: 90px;
+        height: 90px;
+    }
+    .container {
+        height: 200px;
+        justify-content: center;
+    }
+}
+@media all and (min-width: 1000px){
+    nav {
+        background-color: chocolate;
+    }
+}
