@@ -8,3 +8,35 @@ paragraph yellow: #ECB12F
 links blue: #2E71A6
 footer links grey: #454245
 */
+/* Iteracdo 2 */
+*{
+    margin: 0px;
+    padding: 0px;
+}
+@media all and (min-width: 768px) and (max-width: 1024px)
+{
+    .cabecalho{
+        padding: 20px;
+        background-color:  #540B51;
+        display: flex;
+    }
+    nav > div > ul{
+        display: none;
+    }
+    .menu{
+        display: flex;
+    }
+}
+
+/* Iteracdo 3 */
+
+@media all and (min-width: 1024px) and (max-width: 1440px){
+
+}
+
+
+/* Iteraco 4 */
+
+@media all and (min-width: 1440px) {
+
+}
