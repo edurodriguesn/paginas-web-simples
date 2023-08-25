@@ -12,20 +12,56 @@ footer links grey: #454245
 *{
     margin: 0px;
     padding: 0px;
+    border: 0px;
 }
 @media all and (min-width: 768px) and (max-width: 1024px)
 {
-    .cabecalho{
+    *{
+        
+    }
+    nav{
         padding: 20px;
         background-color:  #540B51;
         display: flex;
+        justify-content: space-between;
     }
-    nav > div > ul{
-        display: none;
-    }
-    .menu{
+    nav > *{
         display: flex;
     }
+    nav > button{
+        border: none;
+        background: none;
+        font-size: 0;
+    }
+    nav > ul{
+        display: none;
+    }
+    
+    .titulo{
+        background-color: #540B51;
+        color: white;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .titulo > p{
+        color: #ECB12F; 
+    }
+    .titulo > p > span{
+        color: white;
+    }
+    .textomaior{
+        width: 100px;
+    }
+    .textomenor{
+        width: 100px;
+    }
+    .login{
+        border: 10px
+    }
+    
 }
 
 /* Iteracdo 3 */
