@@ -8,35 +8,32 @@
 
 .container {
     margin: 5px;
-    border: 1px solid black;
-    min-height: 600px;
+    border: 1px solid white;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    height: 150px;
+    background-color: gray;
+    color: white;
     /*background-image: url(Imagens/backimage.jpg);
     background-repeat: repeat;*/
 }
 .container > div {
-    width: 100px;
-    height: 200px;
+    width: 50px;
+    height: 100px;
+    font-size: smaller;
     border: 1px solid red;
-    margin: 20px;
-    padding: 20px;
+    margin: 2px;
+    padding: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-nav {
-    height: 70px;
-    background-color: gray;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 /* CSS PARA TELAS MÉDIAS */
-@media all and (min-width: 700px) and (max-width: 1000px){
+/*@media all and (min-width: 700px) and (max-width: 1000px){
     nav {
         height: 140px;
         font-size: xx-large;
@@ -57,4 +54,4 @@ nav {
         display: none;
         background-color: chocolate;
     }
-}
+}*/
