@@ -11,6 +11,7 @@ footer links grey: #454245
 /* Iteracdo 2 */
 *,*::before,*::after{
     box-sizing: border-box;
+    margin:0px;
 }
 html{
     margin: 0;
@@ -60,9 +61,6 @@ img{
     .titulo > p > span{
         color: white;
     }
-    .googlelogo{
-        width: 10px;
-    }
     .textomaior{
         width: 300px;
     }
@@ -70,8 +68,28 @@ img{
         width: 300px;
     }
     .login{
-        border: 10px
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
+    .login > button{
+        padding: 5px;
+        border: none;
+        height: 45px;
+        text-transform: uppercase;
+        border-radius: 5px;
+        margin: 5px;
+    }
+    .logingoogle{
+        color: white;
+        background-color: #4285F4
+    }
+    .googlelogo{
+        background-color: white;
+        border: 5px solid white;
+        height: 40px;
+    }
+    
     
 }
 
