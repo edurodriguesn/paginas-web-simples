@@ -1,0 +1,18 @@
+*{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+#cabecalho{
+    background: black;
+    color: yellow;
+    padding: 10px 200px;
+    display: flex;
+    justify-content:space-between;
+}
+#assinatura{
+    border: 3px solid red;
+}
+#menu{
+    border: 1px solid blue;
+}
