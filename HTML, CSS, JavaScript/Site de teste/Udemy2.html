@@ -5,16 +5,57 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Página 2</title>
         <style type="text/css">
-            .texto{
-                font-size: 20px;
-                font-weight: bold;
-            }
             body{
-                
+                background: #007fc7;
+            }
+            #container{
+                background: #FFF;
+                width: 800px;
+                margin: 10px auto;
+                padding: 10px;
+            }
+            h1{
+                position: static;
+            }
+            p{
+                width: 300px;
+            }
+            .relative{
+                border: 1px solid red;
+                position: relative;
+                top: 20px;
+                left: 80px;
+            }
+            .absolute{
+                position: absolute;
+                border: 1px solid red;
+            }
+            .fixed{
+                position:fixed;
+                border: 1px solid red;
+                top: 0px;
+                left: 0px;
             }
         </style>
     </head>
     <body>
-        <p class="texto">Conteúdo</p>
+        <div id="container">
+            <h1>Posicionamento</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas 
+                eu tempor odio. Proin id commodo tellus. Sed sit amet dolor at risus 
+                tempor sollicitudin vitae nec nibh
+            </p>
+            <p class="fixed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas 
+                eu tempor odio. Proin id commodo tellus. Sed sit amet dolor at risus 
+                tempor sollicitudin vitae nec nibh
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas 
+                eu tempor odio. Proin id commodo tellus. Sed sit amet dolor at risus 
+                tempor sollicitudin vitae nec nibh
+            </p>
+        </div>
     </body>
 </html>
