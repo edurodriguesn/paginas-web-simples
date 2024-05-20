@@ -1,22 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap');
 *{
     margin: 0px;
     padding: 0px;
-    font-family: "Ubuntu Sans Mono", monospace;
+    font-family: "Radio Canada Big", sans-serif;
 }
 a{
     color: white;
     text-decoration: none;
 }
-h1{
-    font-family: "Jersey 25", sans-serif;
+header h1{
+    font-family: "Jersey 25", sans-serif !important;
 }
 code{
     background: rgb(70, 70, 70);
-    color: rgb(255, 194, 194);
+    color: rgb(248, 229, 229);
     padding: 5px;
-    border-radius: 10%;
 }
 #titulohome{
     background: black url(imagens/fundodev.png);
@@ -33,7 +32,8 @@ code{
     justify-content: center;
     align-items: center;
 }
-#tecnologias > a{
+#tecnologias span{
+    font-family: "Jersey 25", sans-serif;
     text-decoration: none;
     color: black;
     font-size: 2em;
@@ -41,9 +41,6 @@ code{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-#tecnologias > a > span{
-    font-family: "Jersey 25", sans-serif;
 }
 .tecs{
     margin: 5px 20px;
@@ -64,25 +61,39 @@ code{
     align-items: center;
     margin: auto;
 }
+#bodyhtml{
+    display: flex;
+
+}
+#lateralesquerda{
+    width: 20vw;
+}
 .elementotitulohtml{
     margin: 0px 20px;
 }
 #htmlcontent{
-    margin: 20px;
+    width: 60vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.titulodataghtml{
-    font-size: 1.2em;
+#tituloshtml > h1{
+    text-align: center;
 }
-.conteudocentralhtml{
+#tituloshtml > div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+#tituloshtml code{
+    height: 300px;
+}
+#tituloshtml > div > div > *{
     display: inline;
 }
-
-
-
-
+#lateraldireita{
+    width: auto;
+}
 
 
 
