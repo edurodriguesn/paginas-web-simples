@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML - Home</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="html.css">
 </head>
 <header>
     <div id="htmlcabecalho">
@@ -21,7 +22,7 @@
 
         </div>
         <div id="htmlcontent">
-            <div id="tituloshtml">
+            <div id="tituloshtml" class="categorias">
                 <h1>Títulos</h1>
                 <div>
                     <div>
@@ -50,19 +51,72 @@
                     </div>
                 </div>
             </div>
-            <div id="listas">
+            <hr>
+            <div id="listas" class="categorias">
+                <h1>Listas</h1>
+                <div id="listadesordenada">
+                    <h2>Lista não ordenada</h2>
+                    <div>
+                        <code>
+                            &lt;ul&gt;<br>&nbsp;&lt;Item&lt;/li&gt;<br>
+                            &nbsp;&lt;Item&lt;/li&gt;<br>&lt;/ul&gt;
+                        </code>
+                        <ul>
+                            <li>Item</li>
+                            <li>Item</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div><strong>Alterar tipo de marcador</strong></div>
+                        <code>
+                            &lt;ul type = "disc"&gt;
+                        </code><br>
+                        <div>Tipos de marcadores:</div>
+                        <div>
+                            <ul type = disc><li>disc</li></ul>
+                            <ul type = square><li>square</li></ul>
+                            <ul type = circle><li>circle</li></ul>
+                        </div>
+                    </div>                    
+                </div>
+                <div id="listaordenada">
+                    <h2>Lista ordenada</h2>
+                    <div>
+                        <code>
+                            &lt;ol&gt;<br>&nbsp;&lt;Primeiro&lt;/li&gt;<br>
+                            &nbsp;&lt;Segundo&lt;/li&gt;<br>&lt;/ol&gt;
+                        </code>
+                        <ol>
+                            <li>Primeiro</li>
+                            <li>Segundo</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <div><strong>Alterar tipo de marcador</strong></div>
+                        <code>
+                            &lt;ol type = "1"&gt;
+                        </code><br>
+                        <div>Tipos de marcadores:</div>
+                        <div>
+                            <ol type="1"><li>1 (2,3...)</li></ol>
+                            <ol type="A"><li>A (B,C...)</li></ol>
+                            <ol type="a"><li>a (b,c...)</li></ol>
+                            <ol type="I"><li>I (II,III...)</li></ol>
+                            <ol type="i"><li>i (ii,iii...)</li></ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabelas" class="categorias">
 
             </div>
-            <div id="tabelas">
+            <div id="links" class="categorias">
 
             </div>
-            <div id="links">
+            <div id="imagens" class="categorias">
 
             </div>
-            <div id="imagens">
-
-            </div>
-            <div id="formulários">
+            <div id="formulários" class="categorias">
                 
             </div>
         </div>

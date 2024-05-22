@@ -1,3 +1,4 @@
+/*ajustes gerais*/
 @import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap');
 *{
@@ -13,11 +14,21 @@ header h1{
     font-family: "Jersey 25", sans-serif !important;
 }
 code{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8em;
     background: rgb(70, 70, 70);
     color: rgb(248, 229, 229);
     padding: 5px;
     margin: 0px 10px;
 }
+.categorias{
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+}
+/*fim dos ajustes gerais
+
+tela inicial*/
 #titulohome{
     background: black url(imagens/fundodev.png);
     color: yellow;
@@ -46,55 +57,7 @@ code{
 .tecs{
     margin: 5px 20px;
 }
-
-/*Página HTML*/
-/*começo do cabeçalho*/
-#htmlcabecalho{
-    color: white;
-    background: url(imagens/htmlfundo.jpg);
-    padding: 30px;
-    font-size: 2.5em;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-}
-#htmltitulo{
-    display: flex;
-    align-items: center;
-    margin: auto;
-}
-/*fim do cabeçaho
-
-começo do corpo*/
-#bodyhtml{
-    display: flex;
-}
-#lateralesquerda{
-    width: 20vw;
-}
-.elementotitulohtml{
-    margin: 0px 20px;
-}
-#htmlcontent{
-    width: 60vw;
-}
-#tituloshtml{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#tituloshtml > div > div{
-    display: flex;
-    align-items: center;
-    margin: 10px;
-}
-#tituloshtml code{
-    width: 140px;
-}
-#lateraldireita{
-    width: auto;
-}
-
+/*fim da tela inicial*/
 
 
 

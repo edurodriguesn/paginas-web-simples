@@ -1,0 +1,49 @@
+/*começo do cabeçalho*/
+#htmlcabecalho{
+    color: white;
+    background: url(../imagens/htmlfundo.jpg);
+    padding: 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+#htmltitulo{
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+/*fim do cabeçaho
+
+/*corpo geral*/
+#bodyhtml{
+    display: flex;
+}
+#lateralesquerda{
+    width: 20vw;
+}
+#lateraldireita{
+    width: auto;
+}
+/*fim do corpo geral*/
+
+/*Títulos*/
+.elementotitulohtml{
+    margin: 0px 20px;
+}
+#htmlcontent{
+    width: 60vw;
+}
+#tituloshtml{   
+    flex-direction: column;
+}
+#tituloshtml > div > div{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+}
+#tituloshtml code{
+    width: 130px;
+}
+/*fim dos títulos*/
+
