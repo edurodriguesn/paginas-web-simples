@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyAbandonware</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-blue-900 text-white p-4 flex justify-between">
+        <div class="text-lg font-semibold">
+            My MyAbandonware - Download Old Video Games
+        </div>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="random.html" class="hover:underline">Aleatório</a></li>
+                <li><a href="favoritos.html" class="hover:underline">Favoritos</a></li>
+                <li><a href="ajuda.html" class="hover:underline">Ajuda</a></li>
+                <li><a href="contribuicao.html" class="hover:underline">Contribuir</a></li>
+                <li><a href="registro.html" class="hover:underline">Registrar</a></li>
+                <li><a href="\login" class="hover:underline">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="flex justify-between items-center p-4 border border-red-500">
+        <div class="w-1/4">
+            <img src="imagens/logo.png" alt="logo" class="w-24">
+        </div>
+        <div class="w-3/4">
+            <form>
+                <label for="pesquisa" class="block text-sm font-medium text-gray-700">Pesquisar</label>
+                <input type="text" id="pesquisa" name="pesquisa" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </form>
+        </div>
+    </div>
+
+    <main class="p-4 border border-red-500">
+        <section class="mb-8">
+            <h1 class="text-2xl font-bold">Sobre o Projeto</h1>
+            <hr class="my-2">
+            <p class="text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Phasellus rutrum quis tortor et vestibulum. Pellentesque habitant 
+                morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                Sed sit amet massa magna. Maecenas vulputate volutpat magna eget pulvinar. 
+                Morbi blandit quam nec metus semper varius eget ut lorem. Praesent rhoncus 
+                purus nec erat pretium, sit amet molestie felis bibendum. Nunc sodales 
+                magna tempus viverra lacinia. Nam at nisl ante. Morbi sit amet nulla vel 
+                ipsum porttitor cursus a quis orci. Mauris feugiat nulla eu arcu ornare, 
+                in scelerisque leo cursus. Aliquam erat volutpat. Nulla varius in odio 
+                at maximus. Nunc enim ante, mattis et efficitur eu, egestas ut sapien. 
+                In at laoreet ex. Nam maximus, ipsum sit amet pulvinar porta, massa 
+                magna euismod enim, eu lacinia dui mi at tellus. Pellentesque mi massa,
+                vestibulum non pretium vitae, imperdiet feugiat libero.
+            </p>
+        </section> 
+
+    <main class="p-4">
+        <h1 class="text-2xl font-bold mb-4">Galeria de Jogos</h1>
+        <div class="grid grid-cols-3 gap-4">
+            <% conteudos.forEach(function(conteudo) { %>
+            <div class="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden">
+                <img class="w-full h-48 object-cover" src="/uploads/<%= conteudo.imagem %>" alt="<%= conteudo.titulo %>">
+                <div class="p-4">
+                    <h2 class="text-lg font-bold"><%= conteudo.titulo %></h2>
+                </div>
+            </div>
+            <% }); %>
+        </div>      
+        
+    </main>
+</body>
+</html>

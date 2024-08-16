@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content.title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <img class="w-full h-64 object-cover" src="/uploads/<%= contudo.imagem %>" alt="<%= content.title %>">
+        <div class="p-4">
+            <h1 class="text-3xl font-bold mb-4"><%= conteudo.titulo %></h1>
+            <p class="text-gray-700"><%= conteudo.descricao %></p>
+        </div>
+    </div>
+</body>
+</html>
