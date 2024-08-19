@@ -4,12 +4,16 @@ const session = require('express-session');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
-const mongoose = require('mongoose');
 const slugify = require('slugify');
 const ejs = require('ejs');
 
 const app = express();
+const upload = multer({ dest: 'uploads/' });
 const db = new sqlite3.Database('./db/database.db');
+
+// Middleware para processar o corpo da requisição
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Configuração de sessão
 app.use(session({
@@ -24,21 +28,36 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Middleware para servir arquivos estáticos
 app.use(express.static('public'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Configuração de Multer para uploads
-const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+// Criar tabelas se não existirem
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS conteudo (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT,
+        ano INTEGER,
+        plataforma TEXT,
+        categoria TEXT,
+        desenvolvedores TEXT,
+        imagens TEXT
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS plataforma (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT UNIQUE
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS categoria (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT UNIQUE
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS desenvolvedor (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT UNIQUE
+    )`);
 });
 
-const upload = multer({ storage: storage });
-
-// Middleware para analisar o corpo da solicitação
-app.use(express.urlencoded({ extended: true }));
-
-// Rotas
 app.get('/', (req, res) => {
     db.all("SELECT * FROM conteudos", [], (err, rows) => {
         if (err) {
@@ -48,47 +67,12 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/admin', (req, res) => {
-    if (!req.session.loggedIn) {
-        return res.redirect('/login');
-    }
-    res.render('admin');
-});
-
-app.post('/admin/conteudos', async (req, res) => {
-    try {
-        const { title, description, imagePath } = req.body;
-        const slug = slugify(title, { lower: true });
-
-        // Salvar o conteúdo no banco de dados
-        const newContent = new Content({
-            title,
-            description,
-            imagePath,
-            slug
-        });
-        await newContent.save();
-
-        // Gerar a página HTML usando EJS
-        const htmlContent = await ejs.renderFile(
-            path.join(__dirname, 'views', 'template.ejs'),
-            { content: newContent }
-        );
-
-        // Salvar o arquivo HTML na pasta 'public/pages'
-        const filePath = path.join(__dirname, 'public', 'jogos', `${slug}.html`);
-        fs.writeFileSync(filePath, htmlContent, 'utf8');
-
-        res.redirect('/admin');
-    } catch (error) {
-        res.status(500).send('Erro ao criar o conteúdo e a página');
-    }
-});
-
+// Rota para renderizar a página de login
 app.get('/login', (req, res) => {
-    res.render('login');  // Renderiza o arquivo 'login.ejs' que deve estar na pasta 'views'
+    res.render('login');
 });
 
+// Rota para processar o login
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     if (username === 'admin' && password === 'senha123') {
@@ -99,45 +83,134 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.post('/upload', upload.single('imagem'), (req, res) => {
-    if (!req.session.loggedIn) {
-        return res.redirect('/login');
+// Middleware para verificar se o usuário está logado
+function isAuthenticated(req, res, next) {
+    if (req.session.loggedIn) {
+        return next();
+    } else {
+        res.redirect('/login');
     }
-    const { titulo, descricao } = req.body;
-    const imagem = req.file.filename;
+}
 
-    db.run(`INSERT INTO conteudos (titulo, descricao, imagem) VALUES (?, ?, ?)`,
-        [titulo, descricao, imagem], (err) => {
+// Rota para renderizar a página de admin
+app.get('/admin', isAuthenticated, (req, res) => {
+    db.all("SELECT * FROM conteudo", (err, conteudos) => {
+        if (err) {
+            return res.status(500).send('Erro ao carregar os conteúdos');
+        }
+        res.render('admin', { conteudos });
+    });
+});
+
+// Rota para excluir um conteúdo
+app.post('/admin/conteudos/:id/delete', isAuthenticated, (req, res) => {
+    const { id } = req.params;
+    db.run("DELETE FROM conteudo WHERE id = ?", [id], (err) => {
+        if (err) {
+            return res.status(500).send('Erro ao excluir o conteúdo');
+        }
+        res.redirect('/admin');
+    });
+});
+
+// Rota para renderizar a página de edição de conteúdo
+app.get('/admin/conteudos/:id/edit', isAuthenticated, (req, res) => {
+    const { id } = req.params;
+    db.get("SELECT * FROM conteudo WHERE id = ?", [id], (err, conteudo) => {
+        if (err) {
+            return res.status(500).send('Erro ao carregar o conteúdo');
+        }
+        res.render('edit-content', { conteudo });
+    });
+});
+
+// Rota para processar a edição de conteúdo
+app.post('/admin/conteudos/:id/edit', isAuthenticated, upload.array('imagens'), (req, res) => {
+    const { id } = req.params;
+    const { nome, ano, plataforma, categoria, desenvolvedores, descricao, linkTitle, linkURL } = req.body;
+    const linksExternos = Array.isArray(linkTitle) ? linkTitle.map((titulo, index) => ({ titulo, url: linkURL[index] })) : [{ titulo: linkTitle, url: linkURL }];
+    const slug = slugify(nome, { lower: true });
+
+    // Criar pasta com o nome do conteúdo em slug dentro da pasta 'uploads'
+    const contentDir = path.join(__dirname, 'uploads', slug);
+    if (!fs.existsSync(contentDir)) {
+        fs.mkdirSync(contentDir, { recursive: true });
+    }
+
+    // Mover imagens para a pasta criada
+    const imagens = req.files.map(file => {
+        const newFilePath = path.join(contentDir, file.originalname);
+        fs.renameSync(file.path, newFilePath);
+        return path.relative(__dirname, newFilePath);
+    });
+
+    const imagensStr = JSON.stringify(imagens);
+
+    db.run(`UPDATE conteudo SET nome = ?, ano = ?, plataforma = ?, categoria = ?, desenvolvedores = ?, imagens = ? WHERE id = ?`,
+        [nome, ano, plataforma, categoria, desenvolvedores, imagensStr, id],
+        (err) => {
             if (err) {
-                return console.log(err.message);
+                return res.status(500).send('Erro ao atualizar o conteúdo');
             }
-            res.redirect('/');
+            res.redirect('/admin');
         });
 });
-// Serve arquivos estáticos da pasta 'uploads'
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Rota para renderizar a página de criação de novo conteúdo
+app.get('/admin/conteudos/new', isAuthenticated, (req, res) => {
+    res.render('new-content');
+});
+// Rota para adicionar conteúdo
+app.post('/admin/conteudos/new', upload.array('imagens'), (req, res) => {
+    try {
+        const { nome, ano, plataforma, categoria, desenvolvedores, descricao, linkTitle, linkURL } = req.body;
+        const linksExternos = Array.isArray(linkTitle) ? linkTitle.map((titulo, index) => ({ titulo, url: linkURL[index] })) : [{ titulo: linkTitle, url: linkURL }];
+        const slug = slugify(nome, { lower: true });
+
+        // Criar pasta com o nome do conteúdo em slug dentro da pasta 'uploads'
+        const contentDir = path.join(__dirname, 'uploads', slug);
+        if (!fs.existsSync(contentDir)) {
+            fs.mkdirSync(contentDir, { recursive: true });
+        }
+
+        // Mover imagens para a pasta criada
+        const imagens = req.files.map(file => {
+            const newFilePath = path.join(contentDir, file.originalname);
+            fs.renameSync(file.path, newFilePath);
+            return path.relative(__dirname, newFilePath);
+        });
+
+        const imagensStr = JSON.stringify(imagens);
+
+        db.run(`INSERT INTO conteudo (nome, ano, plataforma, categoria, desenvolvedores, imagens) VALUES (?, ?, ?, ?, ?, ?)`,
+            [nome, ano, plataforma, categoria, desenvolvedores, imagensStr],
+            function (err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+
+                const content = { id: this.lastID, nome, ano, plataforma, categoria, desenvolvedores, descricao, linksExternos, imagens };
+                ejs.renderFile(
+                    path.join(__dirname, 'views', 'template.ejs'),
+                    { conteudo: content },
+                    (err, htmlContent) => {
+                        if (err) {
+                            console.log('Erro ao renderizar o template:', err);
+                            res.status(500).send('Erro ao criar a página HTML');
+                        } else {
+                            const filePath = path.join(__dirname, 'public', 'pages', `${slug}.html`);
+                            fs.writeFileSync(filePath, htmlContent, 'utf8');
+                            res.redirect('/admin');
+                        }
+                    }
+                );
+            });
+    } catch (error) {
+        res.status(500).send('Erro ao criar o conteúdo e a página');
+    }
+});
 
 // Inicialização do servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-// Inicializar o banco de dados e a tabela, se necessário
-db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS conteudos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        titulo TEXT NOT NULL,
-        descricao TEXT NOT NULL,
-        imagem TEXT NOT NULL
-    )`);
-});
-
-const contentSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    imagePath: String,
-    slug: String // ou id, para URL amigável
-});
-
-const Content = mongoose.model('Content', contentSchema);

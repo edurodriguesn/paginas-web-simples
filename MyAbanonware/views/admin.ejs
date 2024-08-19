@@ -7,21 +7,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 p-4">
-    <h1 class="text-2xl font-bold mb-4">Cadastrar Novo Conteúdo</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <label class="block mb-2">
-            Título:
-            <input type="text" name="titulo" class="border rounded p-2 w-full" required>
-        </label>
-        <label class="block mb-2">
-            Descrição:
-            <textarea name="descricao" class="border rounded p-2 w-full" required></textarea>
-        </label>
-        <label class="block mb-2">
-            Imagem:
-            <input type="file" name="imagem" class="border rounded p-2 w-full" required>
-        </label>
-        <button type="submit" class="bg-blue-500 text-white rounded p-2 mt-4">Cadastrar</button>
-    </form>
+    <h1 class="text-2xl font-bold mb-4">Administração de Conteúdos</h1>
+    <a href="/admin/conteudos/new" class="bg-blue-500 text-white rounded p-2 mb-4 inline-block">Adicionar Conteúdo</a>
+
+    <h2 class="text-xl font-bold mb-4">Conteúdos Cadastrados</h2>
+    <table class="w-full bg-white shadow-md rounded mb-4">
+        <thead>
+            <tr>
+                <th class="border p-2">Título</th>
+                <th class="border p-2">Imagem de Capa</th>
+                <th class="border p-2">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% conteudos.forEach(conteudo => { %>
+                <tr>
+                    <td class="border p-2"><%= conteudo.nome %></td>
+                    <td class="border p-2">
+                        <% if (conteudo.imagens && conteudo.imagens.length > 0) { %>
+                            <img src="/<%= conteudo.imagens[0] %>" alt="Imagem de Capa" class="w-16 h-16 object-cover">
+                        <% } else { %>
+                            Sem imagem
+                        <% } %>
+                    </td>
+                    <td class="border p-2">
+                        <a href="/admin/conteudos/<%= conteudo.id %>/edit" class="bg-yellow-500 text-white rounded p-2">Editar</a>
+                        <form action="/admin/conteudos/<%= conteudo.id %>/delete" method="POST" class="inline">
+                            <button type="submit" class="bg-red-500 text-white rounded p-2">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
-</html>
+</html> 
